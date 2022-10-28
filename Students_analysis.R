@@ -32,3 +32,6 @@ ggplot(data = sum_df)+
 
 ggplot(data_apl,aes(x=lab, y= mdata, color="blue"))+
   geom_point()
+
+Mjob_int <- table(Student_Performance$Mjob, Student_Performance$internet) 
+
