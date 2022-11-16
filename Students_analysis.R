@@ -27,11 +27,21 @@ sum_apl <-  apply(Student_Performance[25:35], 2, sum)
 sum_df <- tibble(lab = names(sum_apl), sdata = sum_apl )
 
 ggplot(data = sum_df)+
-  geom_point(aes(x=lab, y=sdata))
+  geom_point(aes(x=lab, y=sdata))+
+  labs(title = "Student Performance I")
 
 
-ggplot(data_apl,aes(x=lab, y= mdata, color="blue"))+
-  geom_point()
+ggplot(Student_Performance,aes(G1, G2, color="blue"))+
+  geom_point()+
+  labs(title = "Student Performance II")
 
-Mjob_int <- table(Student_Performance$Mjob, Student_Performance$internet) 
+Mjob_int <- data.frame(table(Student_Performance$Mjob, Student_Performance$internet))  
+
+head(Mjob_int[Mjob_int$Var2=="no",])
+
+ggplot(Mjob_int[Mjob_int$Var2=="no",], aes(Var1, Freq))+
+         geom_point()+
+          labs(title = "Internet",
+               x = "Mother job",
+               y = "Freq")
 
