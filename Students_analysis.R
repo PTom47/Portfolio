@@ -18,6 +18,9 @@ str(Student_Performance)
 #Przeglad danych w przegladarce
 View(head(Student_Performance, n=100))
 
+#Unikalność danych
+head(unique(Student_Performance), n=100)
+
 #Podstawowe parametry statystyczne kolumn liczbowych
 apply(Student_Performance[25:35], 2, sum)
 apply(Student_Performance[25:35], 2, mean)
@@ -26,6 +29,7 @@ apply(Student_Performance[25:35], 2, mean)
 sum_apl <-  apply(Student_Performance[25:35], 2, sum)
 sum_df <- tibble(lab = names(sum_apl), sdata = sum_apl )
 
+#wykresy
 ggplot(data = sum_df)+
   geom_point(aes(x=lab, y=sdata))+
   labs(title = "Student Performance I")
@@ -43,5 +47,7 @@ ggplot(Mjob_int[Mjob_int$Var2=="no",], aes(Var1, Freq))+
          geom_point()+
           labs(title = "Internet",
                x = "Mother job",
-               y = "Freq")
+               y = "Freq"
+               
+
 
