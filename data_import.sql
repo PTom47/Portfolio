@@ -1,7 +1,7 @@
 --Zaladowanie danych z portalu keggle.com (Student Performance Dataset)
 
 use TEST;
-
+--Utworzenie tabeli (przejsciowej )do importu danych
 drop table if exists dbo.Student_Performance_v0;
 
 create table dbo.Student_Performance_v0
@@ -44,7 +44,7 @@ create table dbo.Student_Performance_v0
 
 
 
-
+--Import danych z pliku csv
 bulk insert dbo.Student_Performance_v0 from 'C:\...\student_data.csv'
 with
 	(DATAFILETYPE = 'char',
@@ -96,7 +96,7 @@ create table dbo.Student_Performance (
 	G3 int
 )
 ;
-
+--Zasilenie tabeli docelowej danymi
 insert into dbo.Student_Performance (
 								school,
 								sex ,
