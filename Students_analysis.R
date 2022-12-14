@@ -24,15 +24,24 @@ head(unique(Student_Performance), n=100)
 #Podstawowe parametry statystyczne kolumn liczbowych
 apply(Student_Performance[25:35], 2, sum)
 apply(Student_Performance[25:35], 2, mean)
+apply(Student_Performance[25:35], 2, median)
 
-#Wizualizacja sum
-sum_apl <-  apply(Student_Performance[25:35], 2, sum)
-sum_df <- tibble(lab = names(sum_apl), sdata = sum_apl )
+#Wizualizacja średnich
+mean_apl <-  apply(Student_Performance[25:35], 2, mean)
+library(tidyverse)
+mean_df <- tibble(lab = names(sum_apl), mean_d = mean_apl)
 
-#wykresy
-ggplot(data = sum_df)+
-  geom_point(aes(x=lab, y=sdata))+
-  labs(title = "Student Performance I")
+#wektor pomocniczy do ustalenia rosnącej kolejności na wykresie
+et1 <- c(arrange(mean_df, mean_d)$lab)
+
+
+#wykres średnich
+library(ggplot2)
+ggplot(data = mean_df)+
+  geom_point(aes(x=lab, y=mean_d))+
+  scale_x_discrete(limits=et1)+
+  labs(title = "Student Performance mean")+
+  theme_bw()
 
 
 ggplot(Student_Performance,aes(G1, G2, color="blue"))+
