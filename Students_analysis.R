@@ -43,20 +43,26 @@ ggplot(data = mean_df)+
   labs(title = "Student Performance mean")+
   theme_bw()
 
+#wykres zależności G1 i G2
+ggplot(Student_Performance,aes(G1, G2))+
+  geom_point(color="blue")+
+  labs(title = "Student Performance, G1&G2")+
+  theme_light()
 
-ggplot(Student_Performance,aes(G1, G2, color="blue"))+
-  geom_point()+
-  labs(title = "Student Performance II")
+#Mjob & internet
+Mjob_int <- data.frame(table(Student_Performance$Mjob, Student_Performance$internet)) 
+Mjob_int_y <- Mjob_int[Mjob_int$Var2=="yes",]
 
-Mjob_int <- data.frame(table(Student_Performance$Mjob, Student_Performance$internet))  
+et2 <- c(arrange(Mjob_int_y, Freq)$Var1)
 
-head(Mjob_int[Mjob_int$Var2=="no",])
-
-ggplot(Mjob_int[Mjob_int$Var2=="no",], aes(Var1, Freq))+
+#wykres Mjob & internet
+ggplot(Mjob_int_y, aes(Var1, Freq))+
          geom_point()+
+         scale_x_discrete(limits=et2)+
           labs(title = "Internet",
                x = "Mother job",
-               y = "Freq"
+               y = "Freq")+
+          theme_minimal()
                
 
 
