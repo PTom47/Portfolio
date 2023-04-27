@@ -33,13 +33,23 @@ apply(Student_Performance[25:35], 2, median)
 mean_apl <-  data.frame(avg_value=apply(Student_Performance[25:35], 2, mean))
 mean_apl$category <- row.names(mean_apl)
 
-#wykres zależności G1 i G2
+#Wykresy pudełkowe dla danych liczbowych
+col2plot <- c("age", "Medu","Fedu","traveltime", "studytime",  "failures", "famrel",
+              "freetime",   "goout", "Dalc", "Walc", "health", "absences", "G1", "G2", "G3",
+              "Pedu" )
+
+ggplot(gather( Student_Performance[,col2plot], Category, Value))+
+  geom_boxplot(
+    mapping = aes(x=reorder(Category, Value, FUN=median), y=Value))+
+  labs(x="Category", y="Value")
+
+#Wykres zależności G1 i G2
 ggplot(Student_Performance,aes(G1, G2))+
   geom_point(color="blue")+
   labs(title = "Student Performance, G1&G2")+
   theme_light()
 
-#wykres Mother job & internet
+#Wykres Mother job & internet
 Mjob_int <- data.frame(table(Student_Performance$Mjob, Student_Performance$internet)) 
 Mjob_int_y <- Mjob_int[Mjob_int$Var2=="yes",]
 
